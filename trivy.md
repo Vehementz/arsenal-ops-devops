@@ -83,3 +83,74 @@ To enable license scanning along with vulnerabilities, use the `--scanners` opti
 ```
 trivy sbom --scanners license results.cdx.json
 ```
+
+
+
+### Hide Unfixed Vulnerabilities
+
+Ignore vulnerabilities that currently have no fix available.
+
+```bash
+trivy image --ignore-unfixed ruby:2.4.0
+```
+
+### Filter by Severity
+
+Specify the severity level of vulnerabilities to report.
+
+```bash
+trivy image --severity HIGH,CRITICAL ruby:2.4.0
+```
+
+### Filter by Vulnerability IDs
+
+Create a `.trivyignore` file to ignore specific vulnerability IDs.
+
+```bash
+cat <<EOF >.trivyignore
+# Accept the risk
+CVE-2018-14618
+
+# No impact in our settings
+CVE-2019-1543
+EOF
+
+trivy image python:3.4-alpine3.9
+```
+
+### Filter by Type
+
+Filter vulnerabilities based on their type (e.g., OS packages, application libraries).
+
+```bash
+trivy image --vuln-type os ruby:2.4.0
+```
+
+## Trivy - Reporting and Output Options
+
+Customize the output of your scans and generate reports in various formats.
+
+### Output Formats
+
+Specify the output format of the scan results, such as JSON, table, or SARIF.
+
+```bash
+trivy image --format json python:3.9-slim
+```
+
+### Save Scan Results
+
+Save the scan results to a file for later analysis or integration into other tools.
+
+```bash
+trivy image --output results.json python:3.9-slim
+```
+
+### Generate HTML Report
+
+Generate an HTML report for easy visualization and sharing of scan results.
+
+```bash
+trivy image --format html --output report.html python:3.9-slim
+```
+
