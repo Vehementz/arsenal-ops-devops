@@ -81,3 +81,60 @@ You can scan an older Python image, for example:
 grype python:3.10.14-alpine3.20
 ```
 
+
+
+## Grype - Check Installation
+
+Verify that Grype has been installed correctly.
+
+```
+grype --version
+```
+
+## Grype - Scan Container Image for Vulnerabilities
+
+Scan a container image for vulnerabilities.
+
+```
+grype <image-name>
+```
+
+## Grype - Scan Directory for Vulnerabilities
+
+Scan a directory for vulnerabilities.
+
+```
+grype dir:./
+```
+
+## Grype - Explain a Vulnerability
+
+Deepen understanding of identified vulnerabilities by providing detailed explanations.
+
+```
+grype dkron/dkron -o json | grype explain --id GHSA-w73w-5m7g-f7qc
+```
+
+## Grype - Fail on Specific Vulnerability Severity
+
+Terminate Grype with an error if vulnerabilities are reported at or above a specified severity level.
+
+```
+grype ubuntu:latest --fail-on medium
+```
+
+## Grype - Check Database Status
+
+Check the status of Grype's database including the current version and the date of the last update.
+
+```
+grype db status
+```
+
+## Grype - Update Database
+
+Manually update Grype's database to ensure the most recent data is being used.
+
+```
+grype db update
+```
