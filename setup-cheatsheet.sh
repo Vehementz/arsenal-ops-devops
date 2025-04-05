@@ -1,4 +1,4 @@
 #! /bin/bash
 
-cp *.md ~/.cheats/
+cp ./cheatsheet-files/*.md ~/.cheats/
 
