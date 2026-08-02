@@ -1,5 +1,3 @@
-Here’s a structured and concise guide for **Trivy**, mimicking the style used for Helm, Molecule, and Checkov:
-
 # Trivy
 
 Trivy is a comprehensive security scanner that detects vulnerabilities, misconfigurations, and secrets in containers, filesystems, and Kubernetes clusters.

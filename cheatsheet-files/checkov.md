@@ -1,5 +1,3 @@
-Here’s a similar structured and concise guide for **Checkov**, mimicking the style used for Helm and Molecule:
-
 # Checkov
 
 Checkov is an open-source infrastructure-as-code (IaC) security scanner that can detect misconfigurations in Terraform, Kubernetes, CloudFormation, Dockerfiles, and more.

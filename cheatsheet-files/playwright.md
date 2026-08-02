@@ -1,5 +1,3 @@
-Here’s a structured and concise guide for **Playwright**, mimicking the style used for Helm, Molecule, Checkov, and Trivy:
-
 # Playwright
 
 Playwright is an end-to-end testing framework for web applications. It enables fast and reliable cross-browser testing by controlling Chromium, Firefox, and WebKit browsers with a single API.

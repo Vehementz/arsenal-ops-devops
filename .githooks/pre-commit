@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# Lints staged cheatsheet files before they are committed.
+# Install with: ./scripts/install-hooks.sh   (sets core.hooksPath to .githooks)
+# Bypass once with: git commit --no-verify
+
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+linter="$repo_root/scripts/lint-cheatsheets.py"
+
+[ -f "$linter" ] || exit 0
+
+# Only files staged for this commit, added/copied/modified/renamed.
+mapfile -d '' staged < <(
+    git diff --cached --name-only --diff-filter=ACMR -z -- 'cheatsheet-files/*.md'
+)
+[ ${#staged[@]} -eq 0 ] && exit 0
+
+tmp="$(mktemp -d)"
+trap 'rm -rf "$tmp"' EXIT
+
+# Lint the staged blob, not the worktree file, so partially staged edits are
+# validated exactly as they will land in the commit.
+# The repo-relative path is mirrored under $tmp so basenames stay intact and
+# .cheatlintignore entries still match.
+declare -a targets=()
+declare -a sed_args=()
+for file in "${staged[@]}"; do
+    dest="$tmp/$file"
+    mkdir -p "$(dirname "$dest")"
+    git show ":$file" > "$dest"
+    targets+=("$dest")
+    sed_args+=(-e "s|$dest|$file|g")
+done
+
+if python3 "$linter" "${targets[@]}" | sed "${sed_args[@]}"; then
+    exit 0
+fi
+
+cat >&2 <<'EOF'
+
+Commit blocked: cheatsheet format errors (see above).
+  Rules:  python3 scripts/lint-cheatsheets.py --list-rules
+  Skip a not-yet-converted file by adding it to .cheatlintignore
+  Bypass:  git commit --no-verify
+EOF
+exit 1

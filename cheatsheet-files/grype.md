@@ -1,5 +1,3 @@
-Here’s a structured and concise guide for **Grype**, mimicking the style used for Helm, Molecule, and Checkov:
-
 # Grype
 
 Grype is a vulnerability scanner for container images and filesystems. It detects vulnerabilities in container images, SBOMs, directories, and other supported formats.

@@ -1,5 +1,3 @@
-Certainly! Here's a structured and concise guide for using CrowdSec commands, formatted in a similar style to the Helm documentation you provided:
-
 # CrowdSec
 
 CrowdSec is an open-source and collaborative security automation engine designed to protect servers, services, containers, or virtual machines exposed on the internet with a server-side agent. It analyzes visitor behavior and provides an adapted response to all kinds of attacks.

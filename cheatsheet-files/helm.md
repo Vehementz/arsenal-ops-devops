@@ -1,5 +1,3 @@
-Here's a similar structured and concise guide for `helm`, mimicking the style you've outlined for Ansible:
-
 # Helm
 
 Helm is the package manager for Kubernetes. It allows developers and operators to package, configure, and deploy applications and services onto Kubernetes clusters.

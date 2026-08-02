@@ -1,5 +1,3 @@
-Here’s your Molecule guide, mimicking the structured and concise style you've used for Helm:
-
 # Molecule
 
 Molecule is a testing framework for Ansible roles and playbooks. It helps automate the process of testing, linting, and validating Ansible code in isolated environments.

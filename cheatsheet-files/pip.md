@@ -1,5 +1,3 @@
-Here’s a structured and concise guide for **pip**, mimicking the style used for Helm:
-
 # pip
 
 pip is the package installer for Python. You can use it to install packages from the Python Package Index (PyPI) and other sources.
