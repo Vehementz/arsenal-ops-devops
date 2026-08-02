@@ -1,6 +1,4 @@
 # Files skipped by scripts/lint-cheatsheets.py.
 # These are raw notes that have not been converted to the cheatsheet format yet.
 # Convert one, then delete its line here. Run with --no-ignore to see what is left.
-kind.md
-lynis.md
 crowdsec-to-add.md

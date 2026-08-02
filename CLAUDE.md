@@ -54,5 +54,5 @@ Each file in `cheatsheet-files/` is consumed as a cheatsheet by the tool reading
 
 ## Known gaps
 
-- `kind.md`, `lynis.md`, and `crowdsec-to-add.md` are unconverted raw notes; the first two literally begin with "Need to adapt the format". They are listed in `.cheatlintignore` so the hook does not block on them — convert one, then delete its line from that file. This is the natural pickup work when asked to extend the collection.
+- `crowdsec-to-add.md` is unconverted raw notes, listed in `.cheatlintignore` so the hook does not block on it. Its content is a set of `cscli dashboard` commands that belongs in `crowdsec.md`; folding it in and deleting the file is the natural pickup work. Convert it, then delete its line from the ignore file.
 - `trivy.md` uses ```` ```bash ```` fences where the rest of the collection uses unlabelled ones. This is a lint warning, not an error; left as-is pending a call on which style wins.
