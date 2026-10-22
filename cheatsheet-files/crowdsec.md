@@ -8,7 +8,7 @@ CrowdSec is an open-source and collaborative security automation engine designed
 
 ## CrowdSec - View Metrics
 
-Display metrics about CrowdSec's activities such as events processed, alerts sent, etc.
+Display metrics about CrowdSec's 0activities such as events processed, alerts sent, etc.
 
 ```
 docker exec crowdsec cscli metrics
