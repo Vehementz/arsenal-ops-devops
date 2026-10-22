@@ -193,6 +193,15 @@ class Linter:
             return None
         return h1[0][2].split()[0] if h1[0][2].split() else None
 
+    def _tool_matches(self, tool, expected):
+        """Accept the title's first token, or any whole-word prefix of the title
+        so multi-word names like `HashiCorp Vault` can be used."""
+        if tool.lower() == expected.lower():
+            return True
+        title_words = self.headings[0][2].lower().split() if self.headings else []
+        tool_words = tool.lower().split()
+        return title_words[:len(tool_words)] == tool_words
+
     def _check_sections(self):
         sections = [h for h in self.headings if h[1] == 2]
         if not sections:
@@ -207,7 +216,7 @@ class Linter:
                            f"heading must read `## <Tool> - <Action>`, found: {text!r}")
                 continue
             tool = match.group("tool")
-            if expected and tool.lower() != expected.lower():
+            if expected and not self._tool_matches(tool, expected):
                 self.error(lineno, "section-tool",
                            f"section prefix {tool!r} does not match title tool {expected!r}")
 
