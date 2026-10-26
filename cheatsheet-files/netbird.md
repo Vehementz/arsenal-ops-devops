@@ -1,46 +1,54 @@
 # NetBird
 
-NetBird is an open-source, WireGuard-based overlay network that connects machines into a secure peer-to-peer private network with centralized access control. The `netbird` CLI manages the client agent on each peer.
+NetBird is an open-source WireGuard-based mesh VPN that connects machines into a secure private network with SSO, access control, and no manual firewall configuration.
 
-#platform/multiple #target/Network #cat/VPN
+#platform/multiple #target/Networking #cat/VPN
 
-% netbird, wireguard, vpn, mesh, zero-trust, overlay
+% netbird, vpn, wireguard, mesh network, zero trust
 
-## NetBird - Install Client
+## NetBird - Install on Linux
 
-Install the NetBird client with the official install script (Linux/macOS).
+Install the NetBird client using the official install script.
 
 ```
 curl -fsSL https://pkgs.netbird.io/install.sh | sh
 ```
 
-## NetBird - Connect
+## NetBird - Check Version
 
-Start the client and connect to the network (opens SSO login in a browser on first run).
+Verify that NetBird has been installed correctly.
+
+```
+netbird version
+```
+
+## NetBird - Connect to the Network
+
+Start the client and authenticate through the SSO login flow.
 
 ```
 netbird up
 ```
 
-## NetBird - Connect With Setup Key
+## NetBird - Connect with a Setup Key
 
-Connect a headless peer non-interactively using a setup key.
+Register a peer non-interactively using a setup key, useful for servers and CI.
 
 ```
 netbird up --setup-key <setup-key>
 ```
 
-## NetBird - Connect To Self-Hosted Server
+## NetBird - Connect to a Self-Hosted Management Server
 
-Connect to a self-hosted management server instead of NetBird Cloud.
+Point the client at a self-hosted management server.
 
 ```
-netbird up --management-url https://<netbird-domain>:443 --setup-key <setup-key>
+netbird up --management-url <management-url>
 ```
 
-## NetBird - Disconnect
+## NetBird - Disconnect from the Network
 
-Disconnect from the network and stop the tunnel.
+Bring the connection down.
 
 ```
 netbird down
@@ -48,113 +56,81 @@ netbird down
 
 ## NetBird - Show Status
 
-Show the connection status of the local peer.
+Display the connection state, the peers, and their connection types.
 
 ```
 netbird status
 ```
 
-### NetBird - Show Detailed Status
-
-Show detailed status including every peer, connection type (P2P/relayed) and latency.
+Show detailed information for every peer.
 
 ```
 netbird status -d
 ```
 
-## NetBird - Login
+## NetBird - Log Out
 
-Log in to the management server without bringing the tunnel up.
-
-```
-netbird login
-```
-
-## NetBird - Logout
-
-Log out and remove the peer's login from the management server.
+Deregister this peer from the network and remove its local login.
 
 ```
-netbird logout
+netbird deregister
 ```
 
-## NetBird - List Networks
+## NetBird - Manage the Service
 
-List network routes/resources available to this peer.
-
-```
-netbird networks list
-```
-
-## NetBird - Select Networks
-
-Select which network routes this peer should use.
+Install, start, stop, and restart the NetBird system service.
 
 ```
-netbird networks select <network-id>
-```
-
-## NetBird - Install Service
-
-Install NetBird as a system service and start it.
-
-```
-sudo netbird service install
-sudo netbird service start
-```
-
-## NetBird - Stop Service
-
-Stop the NetBird system service.
-
-```
-sudo netbird service stop
-```
-
-## NetBird - Uninstall Service
-
-Remove the NetBird system service.
-
-```
-sudo netbird service uninstall
-```
-
-## NetBird - SSH To Peer
-
-Open an SSH session to a peer through NetBird (requires SSH enabled on the target peer).
-
-```
-netbird ssh <user>@<peer-ip-or-name>
+netbird service install
+netbird service start
+netbird service stop
+netbird service restart
 ```
 
 ## NetBird - Enable SSH Server
 
-Connect and allow other peers to SSH into this machine through NetBird.
+Allow other peers to connect to this machine through NetBird SSH.
 
 ```
 netbird up --allow-server-ssh
 ```
 
-## NetBird - Create Debug Bundle
+## NetBird - List Networks
 
-Generate an anonymized debug bundle for troubleshooting.
-
-```
-netbird debug bundle --anonymize
-```
-
-## NetBird - Show Version
-
-Show the installed client version.
+List the routed networks available to this peer.
 
 ```
-netbird version
+netbird networks list
 ```
 
-## NetBird - Run In Docker
+## NetBird - Select a Network
 
-Run the NetBird client as a container with a setup key.
+Enable a routed network on this peer.
 
 ```
-docker run --rm -d --name netbird --cap-add=NET_ADMIN -e NB_SETUP_KEY=<setup-key> -v netbird-client:/etc/netbird netbirdio/netbird:latest
+netbird networks select <network-id>
+```
+
+## NetBird - Deselect a Network
+
+Disable a routed network on this peer.
+
+```
+netbird networks deselect <network-id>
+```
+
+## NetBird - Set Log Level
+
+Change the client log level for debugging.
+
+```
+netbird debug log level debug
+```
+
+## NetBird - Create a Debug Bundle
+
+Collect logs and state into a bundle for troubleshooting.
+
+```
+netbird debug bundle
 ```
